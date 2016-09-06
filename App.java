@@ -3,6 +3,7 @@ import java.io.Console;
 public class App {
   public static void main(String[] args) {
     Console console = System.console();
+    float totalCost = 0;
 
     System.out.println("Enter the length of your package in inches");
     String stringPackageL = console.readLine();
@@ -27,11 +28,20 @@ public class App {
 
     if(stringWrappingAnswer.equals("yes")) {
       System.out.println("Your wrapping cost is $" + userPackage.costToWrap());
-      System.out.println("Your shipping cost is $" + userPackage.costToShip());
-      float totalCost = userPackage.costToShip() + userPackage.costToWrap();
-      System.out.println("Your total cost is $" + totalCost);
+      totalCost = userPackage.costToShip() + userPackage.costToWrap();
     } else {
-      System.out.println("Your total cost is $" + userPackage.costToShip());
+      totalCost = userPackage.costToShip();
     }
+
+    System.out.println("Do you have a Prime Membership?");
+    String stringMembership = console.readLine();
+
+    if(stringMembership.equals("yes")){
+      totalCost -= 5;
+      System.out.println("Your Prime Membership card gets you a $5.00 discount!");
+    }
+
+    System.out.println("Your shipping cost is $" + userPackage.costToShip());
+    System.out.println("Your total cost is $" + totalCost);
   }
 }
