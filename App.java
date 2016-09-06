@@ -4,26 +4,34 @@ public class App {
   public static void main(String[] args) {
     Console console = System.console();
 
-    System.out.println("Enter the length of your package");
+    System.out.println("Enter the length of your package in inches");
     String stringPackageL = console.readLine();
-    int packageL = Integer.parseInt(stringPackageL);
+    float packageL = Float.parseFloat(stringPackageL);
 
-    System.out.println("Enter the width of your package");
+    System.out.println("Enter the width of your package in inches");
     String stringPackageW = console.readLine();
-    int packageW = Integer.parseInt(stringPackageW);
+    float packageW = Float.parseFloat(stringPackageW);
 
-    System.out.println("Enter the height of your package");
+    System.out.println("Enter the height of your package in inches");
     String stringPackageH = console.readLine();
-    int packageH = Integer.parseInt(stringPackageH);
+    float packageH = Float.parseFloat(stringPackageH);
 
-    System.out.println("Enter the weight of your package");
+    System.out.println("Enter the weight of your package in lbs");
     String stringPackageWeight = console.readLine();
-    int packageWeight = Integer.parseInt(stringPackageWeight);
+    float packageWeight = Float.parseFloat(stringPackageWeight);
 
     Parcel userPackage = new Parcel(packageL, packageW, packageH, packageWeight);
 
-    Integer totalCost = userPackage.costToShip();
+    System.out.println("Would you like wrapping?");
+    String stringWrappingAnswer = console.readLine();
 
-    System.out.println("Your total cost is $" + totalCost);
+    if(stringWrappingAnswer.equals("yes")) {
+      System.out.println("Your wrapping cost is $" + userPackage.costToWrap());
+      System.out.println("Your shipping cost is $" + userPackage.costToShip());
+      float totalCost = userPackage.costToShip() + userPackage.costToWrap();
+      System.out.println("Your total cost is $" + totalCost);
+    } else {
+      System.out.println("Your total cost is $" + userPackage.costToShip());
+    }
   }
 }
